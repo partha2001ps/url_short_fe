@@ -20,8 +20,15 @@ const signin = async (user) => {
             // console.log(res.data)
             return res.data;
         }
-    } catch (e) {
-        console.log('singin error',e);
+    }
+    catch (error) {
+        if (error.response && error.response.status === 400) {
+            console.log('Invalid user');
+        } else if (error.response && error.response.status === 403) {
+            console.log('Invalid Password');
+        } else {
+            console.error('Signin error:', error);
+        }
     }
 };
 

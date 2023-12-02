@@ -1,7 +1,5 @@
-import axios from 'axios';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../services/auth';
 
 function SingIn() {
@@ -9,24 +7,20 @@ function SingIn() {
     email: '',
     password: ''
   });
-
-  const dispatch = useDispatch();
-
+const navigate=useNavigate()
   const handleSingIn = async (e) => {
     e.preventDefault();
-    try {
+
       const user = await auth.signin(singindata)
       setSingindata({
         email: '',
         password:''
       })
-      console.log(user)
-    } catch (error) {
-      console.log(error);
-    }
+    console.log(user)
+   
+   navigate('/deshboard')
   };
-
-    
+   
       return (
         <div>
           <div>
