@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import auth from '../services/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Singup() {
   const [singupdata, setSingupdata] = useState({
@@ -8,14 +9,19 @@ function Singup() {
     email: '',
     password: ''
   });
-
+  const navigate = useNavigate();
   const handlesingup =async (e) => {
     e.preventDefault();
     const user = await auth.singup(singupdata)
     setSingupdata({firstname: '',
     lastname: '',
     email: '',
-    password: ''})
+      password: ''
+    })
+    console.log(user.message)
+    if (user.message == 'user created successfull') {
+      navigate('/')
+    }
   };
 
   return (
@@ -64,6 +70,8 @@ function Singup() {
         <br />
         <button type='submit'>Submit</button>
       </form>
+      <p>Already User To LogIn Page Go</p>
+      <Link to='/'>SignIn</Link>
     </div>
   );
 }

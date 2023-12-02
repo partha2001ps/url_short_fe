@@ -4,7 +4,7 @@ const singup = async (user) => {
     try {
         const res = await authInstance.post('/singup', user)
         if (res.data) {
-            console.log(res.data)
+            return res.data
         }
     }
     catch (e) {

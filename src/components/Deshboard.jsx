@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { protecdInstance } from '../services/instance';
 
-
 function Dashboard() {
-
   const [url, setUrl] = useState('');
+  const [shortId, setShortId] = useState('');
   const navigate = useNavigate();
-
+  const [allurls,setAllurls]=useState('')
   useEffect(() => {
     getUrls();
   }, []);
@@ -15,21 +14,37 @@ function Dashboard() {
   const getUrls = async () => {
     try {
       const res = await protecdInstance.get('/');
-      console.log(res.data); 
+      // console.log(res.data);
+      setAllurls(res.data)
     } catch (e) {
       console.log('Error in dashboard', e);
       navigate('/');
     }
   };
-
-  const handleUrl = (e) => {
+console.log(allurls)
+  const handleUrl = async (e) => {
     e.preventDefault();
- 
+    const longUrl = url;
+    console.log('Sending request with longUrl:', longUrl);
+    try {
+      const res = await protecdInstance.post('/', { longUrl });
+      console.log(res.data);
+      const { id } = res.data; 
+      setShortId(id);
+      const response = await protecdInstance.get(`/${shortId}`);
+      console.log(response.data);
+  
+      setUrl('');
+    } catch (e) {
+      console.error(e);
+    }
   };
+  
+
   const handlelogout = () => {
-    sessionStorage.removeItem('User')
-    navigate('/')
-  }
+    sessionStorage.removeItem('User');
+    navigate('/');
+  };
 
   return (
     <div>
@@ -48,6 +63,14 @@ function Dashboard() {
           <button type="submit">Submit</button>
         </div>
       </form>
+      {shortId && (
+        <div>
+          <p>Shortened URL:</p>
+          <a href={`https://url-short-8pbk.onrender.com/api/${shortId}`} target="_blank" rel="noopener noreferrer">
+            {`https://url-short-8pbk.onrender.com/api/${shortId}`}
+          </a>
+        </div>
+      )}
       <button onClick={handlelogout}>Logout</button>
     </div>
   );
