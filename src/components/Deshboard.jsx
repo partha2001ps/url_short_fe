@@ -5,8 +5,9 @@ import { protecdInstance } from '../services/instance';
 function Dashboard() {
   const [url, setUrl] = useState('');
   const [shortId, setShortId] = useState('');
+  const [allUrls, setAllUrls] = useState([]);
   const navigate = useNavigate();
-  const [allurls,setAllurls]=useState('')
+
   useEffect(() => {
     getUrls();
   }, []);
@@ -14,36 +15,39 @@ function Dashboard() {
   const getUrls = async () => {
     try {
       const res = await protecdInstance.get('/');
-      // console.log(res.data);
-      setAllurls(res.data)
+      setAllUrls(res.data);
+      console.log(allUrls);
     } catch (e) {
       console.log('Error in dashboard', e);
       navigate('/');
     }
   };
-console.log(allurls)
+
   const handleUrl = async (e) => {
     e.preventDefault();
     const longUrl = url;
-    console.log('Sending request with longUrl:', longUrl);
     try {
       const res = await protecdInstance.post('/', { longUrl });
-      console.log(res.data);
-      const { id } = res.data; 
+      const { id } = res.data;
       setShortId(id);
-      const response = await protecdInstance.get(`/${shortId}`);
-      console.log(response.data);
-  
       setUrl('');
+      getUrls();
     } catch (e) {
       console.error(e);
     }
   };
-  
 
-  const handlelogout = () => {
+  const handleLogout = () => {
     sessionStorage.removeItem('User');
     navigate('/');
+  };
+
+  const handleUrlClick = async (shortId) => {
+    try {
+    await protecdInstance.get(`/${shortId}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -63,15 +67,47 @@ console.log(allurls)
           <button type="submit">Submit</button>
         </div>
       </form>
+
       {shortId && (
         <div>
           <p>Shortened URL:</p>
-          <a href={`https://url-short-8pbk.onrender.com/api/${shortId}`} target="_blank" rel="noopener noreferrer">
+          <a
+            href={`https://url-short-8pbk.onrender.com/api/${shortId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {`https://url-short-8pbk.onrender.com/api/${shortId}`}
           </a>
         </div>
       )}
-      <button onClick={handlelogout}>Logout</button>
+
+      {allUrls.message === 'No URLs found for the user' ? (
+        <p>No URLs available.</p>
+      ) : (
+        <div>
+          <h2>All URLs</h2>
+          <ul>
+            {allUrls.map((url) => (
+              <li key={url._id}>
+                <p>Long URL: {url.longUrl}</p>
+                <p>
+                  Short URL:{' '}
+                  <a
+                    href={`https://url-short-8pbk.onrender.com/api/${url.shortUrl}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => handleUrlClick(url.shortUrl)}
+                  >
+                    {`https://url-short-8pbk.onrender.com/api/${url.shortUrl}`}
+                  </a>
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
