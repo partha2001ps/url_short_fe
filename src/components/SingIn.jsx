@@ -18,7 +18,11 @@ const navigate=useNavigate()
       })
     console.log(user)
    
-   navigate('/deshboard')
+    if (!user) {
+      sessionStorage.removeItem('User')
+      navigate('/')
+    }
+    navigate('/deshboard')
   };
    
       return (
