@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { protecdInstance } from '../services/instance';
 
 function Dashboard() {
   const [url, setUrl] = useState('');
-  const [shortId, setShortId] = useState('');
   const [allUrls, setAllUrls] = useState([]);
+  const [shortId, setShortId] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +16,6 @@ function Dashboard() {
     try {
       const res = await protecdInstance.get('/');
       setAllUrls(res.data);
-      console.log(allUrls);
     } catch (e) {
       console.log('Error in dashboard', e);
       navigate('/');
@@ -42,16 +41,9 @@ function Dashboard() {
     navigate('/');
   };
 
-  const handleUrlClick = async (shortId) => {
-    try {
-    await protecdInstance.get(`/${shortId}`);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   return (
     <div>
+      <Link to='/my-urls'>My URLs</Link>
       <form onSubmit={handleUrl}>
         <label>Enter the URL to convert to a short URL:</label>
         <br />
@@ -60,6 +52,7 @@ function Dashboard() {
           placeholder="Enter URL..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          required
         />
         <br />
         <br />
@@ -78,32 +71,6 @@ function Dashboard() {
           >
             {`https://url-short-8pbk.onrender.com/api/${shortId}`}
           </a>
-        </div>
-      )}
-
-      {allUrls.message === 'No URLs found for the user' ? (
-        <p>No URLs available.</p>
-      ) : (
-        <div>
-          <h2>All URLs</h2>
-          <ul>
-            {allUrls.map((url) => (
-              <li key={url._id}>
-                <p>Long URL: {url.longUrl}</p>
-                <p>
-                  Short URL:{' '}
-                  <a
-                    href={`https://url-short-8pbk.onrender.com/api/${url.shortUrl}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => handleUrlClick(url.shortUrl)}
-                  >
-                    {`https://url-short-8pbk.onrender.com/api/${url.shortUrl}`}
-                  </a>
-                </p>
-              </li>
-            ))}
-          </ul>
         </div>
       )}
 
