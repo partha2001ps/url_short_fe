@@ -13,7 +13,7 @@ function AllUrls() {
         try {
             const res = await protecdInstance.get('/');
             setAllUrls(res.data);
-            console.log(allUrls);
+            // console.log(allUrls);
         } catch (e) {
             console.log('Error in dashboard', e);
             navigate('/');
@@ -25,14 +25,14 @@ function AllUrls() {
             window.location.reload();
         } catch (e) {
             console.error(e);
-            window.location.reload();
+            getUrls();
         }
     };
    
     const handledelete =async (shortId) => {
         try {
             const res = await protecdInstance.delete(`/${shortId}`);
-            window.location.reload();
+            getUrls()
             console.log(res.data)
         } catch (e) {
             console.error(e);

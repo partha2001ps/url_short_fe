@@ -17,7 +17,7 @@ function App() {
           <Route path='/reset-password' element={<Resetpassword />} />
           <Route path='/deshboard' element={<Deshboard />} />
           <Route path='/my-urls' element={<AllUrls />} />
-          <Route path='/reset-password/new-password' element={<Newpassword />} />
+          <Route path='/reset-password/new-password/:OTP' element={<Newpassword />} />
         </Routes>
       </div>
     </Router>
