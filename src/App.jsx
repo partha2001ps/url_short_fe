@@ -6,6 +6,7 @@ import Resetpassword from './components/Resetpassword'
 import Deshboard from './components/Deshboard'
 import AllUrls from './components/AllUrls'
 import Newpassword from './components/Newpassword'
+import ActiveAccount from './components/ActiveAccount'
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           <Route path='/reset-password' element={<Resetpassword />} />
           <Route path='/deshboard' element={<Deshboard />} />
           <Route path='/my-urls' element={<AllUrls />} />
+          <Route path='/activate-account/:id' element={<ActiveAccount />} />
           <Route path='/reset-password/new-password/:OTP' element={<Newpassword />} />
+         
         </Routes>
       </div>
     </Router>
