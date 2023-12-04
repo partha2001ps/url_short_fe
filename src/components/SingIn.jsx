@@ -7,22 +7,24 @@ function SingIn() {
     email: '',
     password: ''
   });
+  const[msg,setMsg]=useState('')
 const navigate=useNavigate()
   const handleSingIn = async (e) => {
     e.preventDefault();
-
       const user = await auth.signin(singindata)
       setSingindata({
         email: '',
         password:''
       })
-    console.log(user)
-   
-    if (!user) {
+    // console.log(user)
+    setMsg(user.message)
+    if (user.message=='Invalid user'||user.message=='Invalid Password') {
       sessionStorage.removeItem('User')
       navigate('/')
     }
-    navigate('/deshboard')
+    else  if(user.message=='password correct'){
+      navigate('/deshboard')
+   }
   };
    
       return (
@@ -53,7 +55,8 @@ const navigate=useNavigate()
               </div>
               <br />
               <button type="submit">Submit</button>
-                  </form>
+            </form>
+            <div><p>{msg}</p></div>
                   <Link to='/reset-password'>Forget Password</Link>
               </div>
               <p>If New User Please Register</p>

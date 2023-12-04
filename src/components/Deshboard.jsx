@@ -7,6 +7,7 @@ function Dashboard() {
   const [allUrls, setAllUrls] = useState([]);
   const [shortId, setShortId] = useState('');
   const navigate = useNavigate();
+  const[showactive,setshowactive]=useState('')
 
   useEffect(() => {
     getUrls();
@@ -15,10 +16,9 @@ function Dashboard() {
   const getUrls = async () => {
     try {
       const res = await protecdInstance.get('/');
-      setAllUrls(res.data);
+     
     } catch (e) {
       console.log('Error in dashboard', e);
-      navigate('/');
     }
   };
   const handleActiveLink = async () => {
@@ -26,7 +26,8 @@ function Dashboard() {
       const data = JSON.parse(sessionStorage.getItem('User'));
       const email = data.email;
       const res = await authInstance.post(`/Acctivatelink/${email}`);
-      console.log(email,res.data);
+      console.log(email, res.data);
+      setshowactive(res.data.message)
     } catch (e) {
       console.log('Error occurred in Active link', e);
     }
@@ -37,6 +38,8 @@ function Dashboard() {
     const longUrl = url;
     try {
       const res = await protecdInstance.post('/', { longUrl });
+      console.log(res.data)
+      setAllUrls(res.data.message);
       const { id } = res.data;
       setShortId(id);
       setUrl('');
@@ -54,6 +57,7 @@ function Dashboard() {
   return (
     <div>
       <Link to='/my-urls'>My URLs</Link>
+      <Link to='/all-urls'>All URL's</Link>
       <form onSubmit={handleUrl}>
         <label>Enter the URL to convert to a short URL:</label>
         <br />
@@ -68,6 +72,7 @@ function Dashboard() {
         <br />
         <div>
           <button type="submit">Submit</button>
+          <p>{ allUrls}</p>
         </div>
       </form>
 
@@ -83,7 +88,7 @@ function Dashboard() {
           </a>
         </div>
       )}
-      <br /> <div><p>If active User Only allowed shorter url convert so that Active your account send a email </p><button onClick={handleActiveLink}>Active Link </button></div><br />
+      <br /> <div><p>If active User Only allowed shorter url convert so that Active your account send a email </p><button onClick={handleActiveLink}>Active Link </button></div><br /><p>{ showactive}</p>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import auth from '../services/auth';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ function Singup() {
     email: '',
     password: ''
   });
+  const[mgs,setMgs]=useState('')
   const navigate = useNavigate();
   const handlesingup =async (e) => {
     e.preventDefault();
@@ -19,10 +20,21 @@ function Singup() {
       password: ''
     })
     console.log(user.message)
-    if (user.message == 'User Created Successfull') {
-      navigate('/')
+    setMgs(user.message)
+    if (user.message === 'User Created Successfully') {
+      setTimeout(() => {
+        navigate('/');
+      }, 5000); 
     }
   };
+  useEffect(() => {
+    if (mgs === 'User Created Successfull') {
+      const timerId = setTimeout(() => {
+        navigate('/');
+      }, 3000);
+      return () => clearTimeout(timerId);
+    }
+  }, [mgs, navigate]);
 
   return (
     <div>
@@ -69,6 +81,7 @@ function Singup() {
         </div>
         <br />
         <button type='submit'>Submit</button>
+        <p>{ mgs}</p>
       </form>
       <p>Already User To LogIn Page Go</p>
       <Link to='/'>SignIn</Link>

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { authInstance } from '../services/instance';
 
 function ActiveAccount() {
+  const[info,setInfo]=useState('')
   const handleactive = async (e) => {
     e.preventDefault();
     const currentURL = window.location.href;
@@ -15,6 +16,7 @@ function ActiveAccount() {
         
         if (res.data) {
           console.log('Activation successful:', res.data);
+          setInfo(res.data.message)
         } else {
           console.error('No data received in the response');
         }
@@ -29,6 +31,7 @@ function ActiveAccount() {
   return (
     <div>
       <button onClick={handleactive}>Activate</button>
+      <p>{info}</p>
     </div>
   );
 }

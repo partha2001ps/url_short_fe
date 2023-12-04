@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { authInstance } from '../services/instance';
 
 function Newpassword() {
-    const [password, setpassword] = useState('');
+  const [password, setpassword] = useState('');
+  const[show,setShow]=useState('')
    const changeNewPassword = async(e) => {
      e.preventDefault();
      const currentURL = window.location.href;
@@ -14,6 +15,7 @@ function Newpassword() {
        console.log(OTP)
        const res = await authInstance.post(`/reset-password/${OTP}`, {password});
        console.log(res.data);
+       setShow(res.data.meaasge)
      } else {
        console.error("URL format doesn't match expected pattern");
      }
@@ -29,7 +31,8 @@ function Newpassword() {
               setpassword( e.target.value );
             }}
             required
-          />   <br /><br /><button type='submit'>submit</button>
+        />   <br /><br /><button type='submit'>submit</button>
+        <div><p>{ show}</p></div>
           </form>
           <Link to='/'>Singin</Link>
         </div>

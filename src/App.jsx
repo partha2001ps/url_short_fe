@@ -7,6 +7,7 @@ import Deshboard from './components/Deshboard'
 import AllUrls from './components/AllUrls'
 import Newpassword from './components/Newpassword'
 import ActiveAccount from './components/ActiveAccount'
+import InFull from './components/InFull'
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path='/my-urls' element={<AllUrls />} />
           <Route path='/activate-account/:id' element={<ActiveAccount />} />
           <Route path='/reset-password/new-password/:OTP' element={<Newpassword />} />
-         
+          <Route path='/all-urls' element={<InFull/>} />
         </Routes>
       </div>
     </Router>

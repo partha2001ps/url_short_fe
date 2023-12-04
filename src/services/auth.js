@@ -18,14 +18,16 @@ const signin = async (user) => {
         if (res.data) {
             sessionStorage.setItem('User', JSON.stringify(res.data));
             // console.log(res.data)
-            return res.data;
+            return { message:"password correct", data: res.data };
         }
     }
     catch (error) {
         if (error.response && error.response.status === 400) {
             console.log('Invalid user');
+            return ({message:'Invalid user'})
         } else if (error.response && error.response.status === 403) {
             console.log('Invalid Password');
+            return ({message:'Invalid Password'})
         } else {
             console.error('Signin error:', error);
         }
