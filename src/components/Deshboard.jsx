@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { protecdInstance } from '../services/instance';
+import { authInstance, protecdInstance } from '../services/instance';
 
 function Dashboard() {
   const [url, setUrl] = useState('');
@@ -21,7 +21,17 @@ function Dashboard() {
       navigate('/');
     }
   };
-
+  const handleActiveLink = async () => {
+    try {
+      const data = JSON.parse(sessionStorage.getItem('User'));
+      const email = data.email;
+      const res = await authInstance.post(`/Acctivatelink/${email}`);
+      console.log(email,res.data);
+    } catch (e) {
+      console.log('Error occurred in Active link', e);
+    }
+  };
+  
   const handleUrl = async (e) => {
     e.preventDefault();
     const longUrl = url;
@@ -73,7 +83,7 @@ function Dashboard() {
           </a>
         </div>
       )}
-
+      <br /> <div><p>If active User Only allowed shorter url convert so that Active your account send a email </p><button onClick={handleActiveLink}>Active Link </button></div><br />
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

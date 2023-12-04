@@ -19,7 +19,7 @@ function Singup() {
       password: ''
     })
     console.log(user.message)
-    if (user.message == 'user created successfull') {
+    if (user.message == 'User Created Successfull') {
       navigate('/')
     }
   };
