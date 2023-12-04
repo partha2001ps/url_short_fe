@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../services/auth';
-
+import '../App.css'
 function SingIn() {
   const [singindata, setSingindata] = useState({
     email: '',
@@ -28,9 +28,9 @@ const navigate=useNavigate()
   };
    
       return (
-        <div>
-          <div>
-            <form onSubmit={handleSingIn}>
+        <div className='container'>
+          <div className='outside'>
+            <form onSubmit={handleSingIn} className='form'>
               <div>
                 <label htmlFor="email">Email:</label>
                 <br />
@@ -57,10 +57,10 @@ const navigate=useNavigate()
               <button type="submit">Submit</button>
             </form>
             <div><p>{msg}</p></div>
-                  <Link to='/reset-password'>Forget Password</Link>
-              </div>
-              <p>If New User Please Register</p>
+            <Link to='/reset-password'>Forget Password</Link>
+            <p>If New User Please Register</p>
               <Link to='/singup'>SingUp</Link>
+              </div>
         </div>
       );
 }

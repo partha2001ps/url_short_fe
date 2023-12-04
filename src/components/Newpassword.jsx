@@ -21,7 +21,8 @@ function Newpassword() {
      }
    };
   return (
-      <div><p>New password Change</p>
+    <div className='container'><div className='outside'>
+      <p>New password Change</p>
           <form onSubmit={changeNewPassword}>
           <label>New Password</label><br />
           <input
@@ -35,6 +36,7 @@ function Newpassword() {
         <div><p>{ show}</p></div>
           </form>
           <Link to='/'>Singin</Link>
+      </div>
         </div>
        
   )

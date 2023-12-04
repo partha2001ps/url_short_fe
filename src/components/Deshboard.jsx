@@ -55,42 +55,52 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      <Link to='/my-urls'>My URLs</Link>
-      <Link to='/all-urls'>All URL's</Link>
-      <form onSubmit={handleUrl}>
-        <label>Enter the URL to convert to a short URL:</label>
-        <br />
-        <input
-          type="text"
-          placeholder="Enter URL..."
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          required
-        />
-        <br />
-        <br />
-        <div>
-          <button type="submit">Submit</button>
-          <p>{ allUrls}</p>
-        </div>
-      </form>
-
-      {shortId && (
-        <div>
-          <p>Shortened URL:</p>
-          <a
-            href={`https://url-short-8pbk.onrender.com/api/${shortId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {`https://url-short-8pbk.onrender.com/api/${shortId}`}
-          </a>
-        </div>
-      )}
-      <br /> <div><p>If active User Only allowed shorter url convert so that Active your account send a email </p><button onClick={handleActiveLink}>Active Link </button></div><br /><p>{ showactive}</p>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="main-container">
+    <Link to='/my-urls' className="nav-link">My URLs</Link>
+    <Link to='/all-urls' className="nav-link">All URL's</Link>
+    <form onSubmit={handleUrl} className="url-form">
+      <label className="url-label">Enter the URL to convert to a short URL:</label>
+      <br />
+      <input
+        type="text"
+        placeholder="Enter URL..."
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        required
+        className="url-input"
+      />
+      <br />
+      <br />
+      <div className="submit-container">
+        <button type="submit" className="submit-button">Submit</button>
+        <p className="all-urls">{allUrls}</p>
+      </div>
+    </form>
+  
+    {shortId && (
+      <div className="short-url-container">
+        <p className="short-url-label">Shortened URL:</p>
+        <a
+          href={`https://url-short-8pbk.onrender.com/api/${shortId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="short-url-link"
+        >
+          {`https://url-short-8pbk.onrender.com/api/${shortId}`}
+        </a>
+      </div>
+    )}
+    <br />
+    <div className="activation-container">
+      <p className="activation-info">
+        If an active user is allowed to convert a URL, an email will be sent to activate your account.
+      </p>
+      <button onClick={handleActiveLink} className="activate-link-button">Activate Link</button>
+      <p className="show-active">{showactive}</p>
     </div>
+    <button onClick={handleLogout} className="logout-button">Logout</button>
+  </div>
+  
   );
 }
 

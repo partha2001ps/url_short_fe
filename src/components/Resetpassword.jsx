@@ -20,7 +20,7 @@ function Resetpassword() {
 
   return (
     <div className='container'>
-       <div className='inside'> <div>
+       <div className='outside'> <div>
         <h2>Reset Password</h2>
         <label>Email Id:</label><br />
         <input

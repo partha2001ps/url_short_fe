@@ -37,8 +37,9 @@ function Singup() {
   }, [mgs, navigate]);
 
   return (
-    <div>
-      <form onSubmit={handlesingup}>
+    <div className='signup'>
+      <div className='outside'>
+      <form onSubmit={handlesingup} >
         <div>
           <label>First Name:</label><br />
           <input
@@ -85,6 +86,7 @@ function Singup() {
       </form>
       <p>Already User To LogIn Page Go</p>
       <Link to='/'>SignIn</Link>
+    </div>
     </div>
   );
 }
