@@ -4,15 +4,37 @@
     align-items: center;
     height: 100vh;
     background-image: url('./image/wp2939900.webp'); 
-   background-size: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #333;
   }
-  .signup{
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  h2 {
+    color: #0056b3;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);
+  }
+  .signup {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('./image/url-shortener.webp'); 
-background-position-x: left;
+    background-image: url('./image/pexels-pixabay-414660.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #333;
+  }
+  @media only screen and (max-width: 790px) {
+    .signup {
+      background-size: cover;
+    }
   }
   .outside {
     width: 300px;
@@ -20,7 +42,12 @@ background-position-x: left;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: white; 
+    background-color: rgba(255, 255, 255, 0);
+    color: whitesmoke; 
+  }
+  .back{
+    color: #080808;
+    font-size: large;
   }
   
   .form {
@@ -57,33 +84,61 @@ background-position-x: left;
   
   p {
     margin-top: 10px;
+    color: #fb0e06;
   }
   
   a {
     text-decoration: none;
-    color: #007bff;
+    color: #077dfb;
   }
   
   a:hover {
     text-decoration: underline;
     color: #0056b3;
   }
+ 
+  .your-custom-class {
+    background-color: #eaeaea;
+    padding: 10px;
+    height: 100vh;
+  }
+  
+  #btn {
+    width: 50%; 
+  }
+  
+  h3 {
+    margin-top: 20px;
+  }
+  
   .main-container {
    width: 100vw;
    height: 100vh;
     margin: 0 auto;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    background-image: url(./image/pexels-pixabay-36717.jpg);
-   background-size: cover;
+    background-image: url(./image/url-shortener.webp);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: #f9f2f2;
   }
-  
+  @media only screen and (max-width: 790px) {
+    .main-container {
+      background-size: cover;
+    }
+  }
+  .nav{
+    text-align: right;
+  }
   .nav-link {
     text-decoration: none;
-    color: #333;
+    color: #940101;
     margin-right: 20px;
-    color:white;
+    font-weight: bolder;
+    font-size: 25px;
   }
+  
   
   .url-form {
     margin-top: 20px;
@@ -91,11 +146,11 @@ background-position-x: left;
   
   .url-label {
     font-weight: bold;
-    color: white;
+    /* color: white; */
   }
   
   .url-input {
-    width: 100%;
+    width: 78%;
     padding: 10px;
     margin-top: 5px;
   }
@@ -119,7 +174,7 @@ background-position-x: left;
   
   .short-url-label {
     font-weight: bold;
-    color: #d9534f;
+    color: #fe03d0;
   }
   
   .short-url-link {
@@ -134,7 +189,7 @@ background-position-x: left;
   }
   
   .activation-info {
-    color:whitesmoke;
+    color:black
   }
   
   .activate-link-button {
@@ -174,7 +229,10 @@ background-position-x: left;
       width: 80%;
       margin: 0 auto;
     }
-  
+    .nav-link{
+      font-size: large;
+      color:darkblue;
+    }
     .form {
       width: 100%;
     }
@@ -196,14 +254,57 @@ background-position-x: left;
     }
   
     table {
-      font-size: 14px;
+      font-size: 10px;
     }
   
     th, td {
-      padding: 8px;
+      padding: 6px;
     }
   
     .nav-link {
       margin-right: 10px;
     }
   }
+
+* {
+  transition: all 0.3s ease;
+}
+.main-container {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+button, .submit-button, .activate-link-button, .logout-button {
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover, .submit-button:hover, .activate-link-button:hover, .logout-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+input:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+@keyframes fadeInTableRow {
+  to {
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .nav-link {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .nav-link:hover {
+    transform: translateX(5px);
+  }
+}

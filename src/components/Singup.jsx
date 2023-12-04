@@ -39,7 +39,8 @@ function Singup() {
   return (
     <div className='signup'>
       <div className='outside'>
-      <form onSubmit={handlesingup} >
+       <div className='back'> <form onSubmit={handlesingup} >
+        <h2>URL SHORTENER REGISTER</h2>
         <div>
           <label>First Name:</label><br />
           <input
@@ -85,7 +86,7 @@ function Singup() {
         <p>{ mgs}</p>
       </form>
       <p>Already User To LogIn Page Go</p>
-      <Link to='/'>SignIn</Link>
+      <Link to='/'>SignIn</Link></div>
     </div>
     </div>
   );

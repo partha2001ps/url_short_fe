@@ -30,9 +30,12 @@ function ActiveAccount() {
 
   return (
     <div>
-      <button onClick={handleactive}>Activate</button>
+      <div className="your-custom-class">
+      <h3>To below, click the Active button to activate your account</h3>
+      <button onClick={handleactive} id='btn'>Activate</button>
       <p>{info}</p>
     </div>
+</div>
   );
 }
 

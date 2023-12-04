@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { authInstance } from '../services/instance';
 
 function Newpassword() {
   const [password, setpassword] = useState('');
+  const navigate=useNavigate()
   const[show,setShow]=useState('')
    const changeNewPassword = async(e) => {
      e.preventDefault();
@@ -16,13 +17,13 @@ function Newpassword() {
        const res = await authInstance.post(`/reset-password/${OTP}`, {password});
        console.log(res.data);
        setShow(res.data.meaasge)
+       navigate('/')
      } else {
        console.error("URL format doesn't match expected pattern");
      }
    };
   return (
     <div className='container'><div className='outside'>
-      <p>New password Change</p>
           <form onSubmit={changeNewPassword}>
           <label>New Password</label><br />
           <input

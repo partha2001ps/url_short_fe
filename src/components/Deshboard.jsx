@@ -56,8 +56,9 @@ function Dashboard() {
 
   return (
     <div className="main-container">
-    <Link to='/my-urls' className="nav-link">My URLs</Link>
-    <Link to='/all-urls' className="nav-link">All URL's</Link>
+      <h1>Our Webside URL Shortener</h1>
+    <div className='nav'><Link to='/my-urls' className="nav-link">My URLs</Link>
+    <Link to='/all-urls' className="nav-link">All URL's</Link></div>
     <form onSubmit={handleUrl} className="url-form">
       <label className="url-label">Enter the URL to convert to a short URL:</label>
       <br />
