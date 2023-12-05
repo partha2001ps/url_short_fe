@@ -235,6 +235,12 @@
       flex-wrap: wrap;
       justify-content: space-between;
     }
+    .navBar{
+      height: 100px;
+    }
+    .logout-button{
+      margin:15px ;
+    }
     .outside {
       width: 80%;
       margin: 0 auto;
