@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { authInstance } from '../services/instance';
+import NavBar from './NavBar';
 
 function InFull() {
   const [data, setData] = useState([]);
@@ -19,7 +20,7 @@ function InFull() {
     }, []); 
 
   return (
-      <div><h1>URLS IN TABLE</h1>
+      <div> <NavBar/><h1>URLS IN TABLE</h1>
           <div>
     <table>
         <thead>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { authInstance, protecdInstance } from '../services/instance';
+import NavBar from './NavBar';
 
 function AllUrls() {
     const [allUrls, setAllUrls] = useState([]);
@@ -40,6 +41,7 @@ function AllUrls() {
     }
     return (
         <div>
+                 <NavBar/>
             {allUrls.message === 'No URLs found for the user' ? (
                 <p>No URLs available.</p>
             ) : (

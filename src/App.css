@@ -112,41 +112,57 @@
   }
   
   .main-container {
-   width: 100vw;
    height: 100vh;
     margin: 0 auto;
     padding: 20px;
     font-family: 'Arial', sans-serif;
-    background-image: url(./image/url-shortener.webp);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-color: #f9f2f2;
+    background: linear-gradient(to right, rgb(216, 209, 209), rgb(223, 244, 233));
   }
-  @media only screen and (max-width: 790px) {
-    .main-container {
-      background-size: cover;
-    }
-  }
-  .nav{
-    text-align: right;
-  }
-  .nav-link {
-    text-decoration: none;
-    color: #940101;
-    margin-right: 20px;
-    font-weight: bolder;
-    font-size: 25px;
-  }
-  
-  
+.navBar {
+  background-color: #555050; 
+  height: 60px;
+  padding-top: 5px;
+}
+.nav ul {
+  list-style-type: none; 
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+}
+.nav li {
+  margin-right: 20px; 
+  display: inline-block;
+}
+
+.nav a {
+  text-decoration: none; 
+  font-weight: bold; 
+}
+
+.nav a:hover {
+  text-decoration: underline; 
+  color: #fe03d0;
+}
+.nav {
+  display: flex;
+  margin-right: 20px;
+}
+.logout-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  margin: 0px 0px 5px auto;
+}
   .url-form {
     margin-top: 20px;
   }
   
   .url-label {
     font-weight: bold;
-    /* color: white; */
   }
   
   .url-input {
@@ -157,7 +173,6 @@
   
   .submit-container {
     margin-top: 15px;
-
   }
   
   .submit-button {
@@ -200,15 +215,6 @@
     cursor: pointer;
     margin-top: 10px;
   }
-  
-  .logout-button {
-    background-color: #d9534f;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    margin-top: 20px;
-  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -225,6 +231,10 @@
     background-color: #f2f2f2;
   }
   @media only screen and (max-width: 600px) {
+    .nav {
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
     .outside {
       width: 80%;
       margin: 0 auto;
@@ -240,11 +250,6 @@
     input {
       width: 100%;
     }
-  
-    .submit-button, .activate-link-button, .logout-button {
-      width: 100%;
-    }
-  
     .short-url-label {
       font-size: 16px;
     }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authInstance, protecdInstance } from '../services/instance';
+import NavBar from './NavBar';
 
 function Dashboard() {
   const [url, setUrl] = useState('');
@@ -49,16 +50,11 @@ function Dashboard() {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem('User');
-    navigate('/');
-  };
 
   return (
-    <div className="main-container">
+    <div> <NavBar />
+      <div className="main-container">
       <h1>Our Webside URL Shortener</h1>
-    <div className='nav'><Link to='/my-urls' className="nav-link">My URLs</Link>
-    <Link to='/all-urls' className="nav-link">All URL's</Link></div>
     <form onSubmit={handleUrl} className="url-form">
       <label className="url-label">Enter the URL to convert to a short URL:</label>
       <br />
@@ -71,10 +67,13 @@ function Dashboard() {
         className="url-input"
       />
       <br />
-      <br />
+        <br />
+        <h4>ShortURL is a free tool to shorten URLs and generate short links
+URL shortener allows to create a shortened link making it easy to share</h4>
       <div className="submit-container">
         <button type="submit" className="submit-button">Submit</button>
-        <p className="all-urls">{allUrls}</p>
+          <p className="all-urls">{allUrls}</p>
+          
       </div>
     </form>
   
@@ -99,8 +98,8 @@ function Dashboard() {
       <button onClick={handleActiveLink} className="activate-link-button">Activate Link</button>
       <p className="show-active">{showactive}</p>
     </div>
-    <button onClick={handleLogout} className="logout-button">Logout</button>
-  </div>
+   
+  </div></div>
   
   );
 }
